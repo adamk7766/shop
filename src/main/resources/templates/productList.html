@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="http://code.jquery.com/jquery-latest.min.js"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function(){
+
+            $("a.confirm").click(function(){
+            return window.confirm("Czy na pewno chcesz to usunąć?");
+
+            });
+        });
+    </script>
+
+</head>
+<body>
+
+<h1>Lista Produktów</h1>
+
+<p th:if="${message}" id="message" th:text="${message}"/>
+
+<table>
+    <thead>
+    <tr>
+        <th>Nazwa Produktu</th>
+        <th>Opis Produktu</th>
+        <th>Info</th>
+        <th>Usuń</th>
+
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="product: ${products}">
+        <td th:text="${product.getName()}"/>
+        <td th:text="${product.getDescription()}"/>
+        <td><a th:href="@{ '/products/'+${product.name} }"><img src="icon.png" alt="edite icon"></a></td>
+        <td><a th:href="@{ '/products/'+${product.name}+'/delete'}" class="confirm"><img src="delete_icon.png" alt="delete icon"></a></td>
+
+
+    </tr>
+    </tbody>
+</table>
+<a></a>
+<a href="/add">Dodaj nowy produkt</a>
+
+</body>
+</html>
